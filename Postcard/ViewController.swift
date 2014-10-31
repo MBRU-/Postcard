@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         
         enterNameTeFi.text = ""
         enterNameTeFi.resignFirstResponder()
+        
 
     }
     

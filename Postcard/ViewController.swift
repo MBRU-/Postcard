@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var nameLabel: UILabel!
+    
     @IBOutlet weak var enterNameTeFi: UITextField!
     
     @IBOutlet weak var enterMessageTeFi: UITextField!
@@ -25,7 +27,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        messageLabel.hidden = false
+        nameLabel.hidden = true
+        messageLabel.hidden = true
 
     }
 
@@ -38,15 +41,27 @@ class ViewController: UIViewController {
     @IBAction func sendMailButtonPressed(sender: UIButton) {
 
         messageLabel.hidden = false
-        messageLabel.text = enterNameTeFi.text
-        messageLabel.textColor = UIColor.greenColor()
-        messageLabel.backgroundColor = UIColor.redColor()
-        messageLabel.textAlignment = NSTextAlignment.Left
-        sendButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
-        sendButton.setTitle("Message sent", forState: UIControlState.Normal )
+        if  (!enterMessageTeFi.text.isEmpty) && (!enterNameTeFi.text.isEmpty) {
+            nameLabel.hidden = false
+            messageLabel.text = enterMessageTeFi.text
+            messageLabel.textColor = UIColor.greenColor()
+            messageLabel.backgroundColor = UIColor.redColor()
+            messageLabel.textAlignment = NSTextAlignment.Left
+            sendButton.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
+            sendButton.setTitle("Message sent", forState: UIControlState.Normal )
+            nameLabel.text = enterNameTeFi.text
+            nameLabel.textColor = UIColor.blueColor()
+            enterMessageTeFi.text = ""
+            
+            enterNameTeFi.text = ""
+            enterNameTeFi.resignFirstResponder()
+    
+        }
+        else {
+            messageLabel.textColor = UIColor.redColor()
+            messageLabel.text = "Enter name and message first"
+        }
         
-        enterNameTeFi.text = ""
-        enterNameTeFi.resignFirstResponder()
         
         // last line entered
 
@@ -54,3 +69,4 @@ class ViewController: UIViewController {
     
 }
 
+    
